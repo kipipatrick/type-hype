@@ -20,7 +20,10 @@ class LoginServices {
       if(user[0]){
         if(user[0]['password']=== password){
             sessionStorage.setItem('CURRENT_USER', JSON.stringify(user[0]))
-            return user[0]
+            return {
+                name: user[0].name,
+                email: user[0].email
+            }
         } else {
             throw new Error('Username or Password may be incorrect. Please try again.') 
         }

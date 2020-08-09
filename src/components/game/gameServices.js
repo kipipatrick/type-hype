@@ -7,13 +7,11 @@ class GameServices{
 
     static async getText(){
         let text = await axios.get(`https://baconipsum.com/api/?type=all-meat&start-with-lorem=1`)
-        console.log(text.data[Math.floor(Math.random() * 4) +1])
         return text.data[Math.floor(Math.random() * 4) +1]
     }
 
     static async saveScore(value){
         let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
-        console.log(value)
         let saveStore = await axios.post(`${URL}/scores`, {
             id: new Date().getTime(),
             name: user['name'],
