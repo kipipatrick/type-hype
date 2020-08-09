@@ -3,10 +3,11 @@ import { Input, Row, Col , Statistic, Button, Modal, List, Rate, Progress} from 
 import {getText, saveScore} from './gameActions'
 import { useDispatch, useSelector ,shallowEqual} from 'react-redux'
 import { useHistory } from "react-router-dom";
-
+import moment from 'moment'
 let TypingTest = (props)=>{
     const dispatch = useDispatch()
     let text = useSelector(state => state.game.text, shallowEqual)
+    let saved = useSelector(state => state.game.saved, shallowEqual)
     let history = useHistory()
     let [input, setInput] = React.useState('')
     const [seconds, setSeconds] = React.useState(2);
@@ -58,7 +59,10 @@ let TypingTest = (props)=>{
 
       }, []);
 
+      function confirmSave(){
 
+       window.location.reload()
+      }
 
     function compareArray(input, text){
         let x = false
@@ -72,6 +76,7 @@ let TypingTest = (props)=>{
  
 
     }
+
 
     function saveAndRetry(){
       dispatch(saveScore(getCorrectText()/(timeUp/60),history))
@@ -116,16 +121,29 @@ let TypingTest = (props)=>{
      return correct
     }
 
-console.log(getCorrectText(),(timeUp * 0.0166667, timeUp))
+
     
     
     return(
         <div>
           <Modal
-          title="Your Results"
+          title={<div style={{
+            color: '#8E6AAC'
+         }}>Your Results</div>}
+         style={{
+           padding: 1,
+           backgroundColor: '#8E6AAC'
+         }}
+
           visible={showResults}
+          // visible={true}
           onOk={()=>saveAndRetry()}
+          onCancel={()=>saveAndRetry()}
           okText={'Save and Retry'}
+          cancelButtonProps={{style: {display: 'none'}}}
+          okButtonProps={{size: 'large', style:{
+             background: '#8E6AAC', color:'white'
+          }}}
           // onCancel={()=>setShowResults(false)}
         >
          <Row gutter={16}>
@@ -134,7 +152,7 @@ console.log(getCorrectText(),(timeUp * 0.0166667, timeUp))
     </Col>
    
   </Row>
-  <div style={{color:"#8E6AAC", fontWeight:600, fontSize: 16, marginTop:10, marginBottom:10}}>What your score means</div>
+  <div style={{color:"#8E6AAC", fontWeight:400, fontSize: 16, marginTop:10, marginBottom:10}}>What your score means</div>
   <List
     itemLayout="horizontal"
     dataSource={speedResults}
@@ -149,6 +167,21 @@ console.log(getCorrectText(),(timeUp * 0.0166667, timeUp))
     )}
   />
 
+        </Modal>
+        <Modal 
+       bodyStyle={{backgroundColor: '#8E6AAC'}}
+       okText={'OK'}
+
+       cancelButtonProps={{style: {display: 'none'}}}
+       okButtonProps={{size: 'large', style:{
+          background: '#8E6AAC', color:'white',
+       }}}
+       
+        visible={saved}  onOk={confirmSave}>
+              <div style={{color: 'white', fontSize: 20, fontWeight: 600, marginBottom: '5vh'}}>Results Saved</div> 
+      <div style={{color: 'white', fontSize: 14, fontWeight: 600}}>ID : {saved?saved['id']: ''}</div> 
+      <div style={{color: 'white', fontSize: 14, fontWeight: 600}}>NAME : {saved?saved['name']: ''}</div> 
+      <div style={{color: 'white', fontSize: 14, fontWeight: 600}}>DATE: { saved?moment(saved['id']).format('DD MMM YYYY hh:mm A'): ''}</div> 
         </Modal>
 
               <Row gutter={16} style={{marginTop: 20, marginBottom:20}}>
@@ -199,7 +232,7 @@ console.log(getCorrectText(),(timeUp * 0.0166667, timeUp))
     />
             </Col>
             </Row>
-            <div style={{color: 'white', fontSize: 16, fontWeight: "bold", marginTop: '5vh', marginBottom: '5vh', display: seconds === 0|| compareArray(inputArray, textArray) ? '': "none"}}><Button onClick={()=>setShowResults(true)}>Show Results</Button></div>
+            <div style={{color: 'white', fontSize: 16, fontWeight: "bold", marginTop: '5vh', marginBottom: '5vh', display: seconds === 0|| compareArray(inputArray, textArray) ? '': "none"}}><Button size='large' style={{ background: '#8E6AAC', color:'white'}} onClick={()=>setShowResults(true)}>Show Results</Button></div>
 
         </div>
         

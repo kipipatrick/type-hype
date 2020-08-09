@@ -18,6 +18,10 @@ class GameServices{
             id: new Date().getTime(),
             name: user['name'],
             score:value
+        }, {
+            headers: {
+                "Content-header": 'application/json'
+            }
         })
         return saveStore.data
         

@@ -7,6 +7,7 @@ export const GameActionsTypes = {
     GAME_SUCCESS: '@@GAME_SUCCESS',
     GAME_FAILED: '@@GAME_FAILED',
     GAME_SUCCESS_SCORES: '@@GAME_SUCCESS_SCORES',
+    SAVE_GAME: '@@SAVE_GAME',
     
 }
 
@@ -30,10 +31,10 @@ export const getText = ()=>{
         return async(dispatch)=>{
              try {
                  dispatch({type: GameActionsTypes.GAME_REQUEST})
-            await GameServices.saveScore(value)
+           let save = await GameServices.saveScore(value)
             // window.location.reload()
          
-            //    dispatch({type: GameActionsTypes.GAME_SUCCESS, payload: text})
+            dispatch({type: GameActionsTypes.SAVE_GAME, payload: save})
              } catch (error) {
                  console.log(error.message)
                  // dispatch(LoginActionsTypes.LOGIN_FAILED)

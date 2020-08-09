@@ -6,7 +6,8 @@ const initialState = {
   text: null,
   loading: false,
   error: null,
-  scores: []
+  scores: [],
+  saved: null
 };
 
 export default handleActions(
@@ -22,6 +23,13 @@ export default handleActions(
         ...state,
  
         text: action.payload
+      };
+    },
+    [GameActionsTypes.SAVE_GAME]: (state, action) => {
+      return {
+        ...state,
+ 
+        saved: action.payload
       };
     },
     [GameActionsTypes.GAME_SUCCESS_SCORES]: (state, action) => {
