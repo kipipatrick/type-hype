@@ -28,6 +28,7 @@ class GameServices{
     static  async getScores(){
         let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
         let scores = await axios.get(`${URL}/scores`)
+        
         return scores.data.filter(item => item.name === user['name'])
     }
 }

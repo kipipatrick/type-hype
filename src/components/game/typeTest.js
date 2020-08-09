@@ -93,7 +93,7 @@ let TypingTest = (props) => {
         inputArray[index].replace(/\s/g, "") ===
         textArray[index].replace(/\s/g, "")
       ) {
-        return "blue";
+        return "#25343E";
       } else {
         return "white";
       }
