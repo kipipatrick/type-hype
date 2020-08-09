@@ -9,27 +9,20 @@ class GameServices{
         return text.data[Math.floor(Math.random() * 4) +1]
     }
 
-    static saveScore(value){
-     
+    static async saveScore(value){
+        let saveStore = await axios.post(`http://localhost:3001/scores`, {
+            id: new Date().getTime(),
+            name: 'Rain Sindayen',
+            score: 40
+        })
+        return saveStore.data
+        
     }
 
-    static getScores(){
-        const knownUsers = [
-            {
-                name: 'Rain Sindayen',
-                email: 'rain@sindayen.com',
-                password: 'P@ssw0rd123!',
-                currentScore: 110
-            },
-            {
-                name: 'Kipi Patrick',
-                email: 'kipi@patrick.com',
-                password: 'P@ssw0rd123!',
-                currentScore:115
-            }
-        ]
-
-        return knownUsers
+    static  async getScores(){
+        let scores = await axios.get(`http://localhost:3001/scores`)
+        this.saveScore()
+        return scores.data
     }
 }
 

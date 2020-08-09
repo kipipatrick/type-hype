@@ -1,0 +1,71 @@
+{
+  "users": [
+    {
+      "name": "Rain Sindayen",
+      "email": "rain@sindayen.com",
+      "password": "P@ssw0rd123!",
+      "currentScore": 110
+    },
+    {
+      "name": "Kipi Patrick",
+      "email": "kipi@patrick.com",
+      "password": "P@ssw0rd123!",
+      "currentScore": 115
+    }
+  ],
+  "scores": [
+    {
+      "name": "Rain Sindayen",
+      "score": 110
+    },
+    {
+      "name": "Rain Sindayen",
+      "score": 100
+    },
+    {
+      "id": 1,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938627572,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938634295,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938636249,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938702806,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938775882,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938789705,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938798400,
+      "name": "Rain Sindayen",
+      "score": 40
+    },
+    {
+      "id": 1596938867801,
+      "name": "Rain Sindayen",
+      "score": 40
+    }
+  ]
+}

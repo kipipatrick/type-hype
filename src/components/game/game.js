@@ -24,11 +24,11 @@ let Game = ()=>{
         <Row>
         <Col style={{backgroundColor: `#8E6AAC`, padding: 20, height: '100vh'}} span={6} >
            <div style={{color: 'white', fontSize: 50, fontWeight: "600"}}>Type+Hype</div>
-           <div style={{color: 'white', fontSize: 20, fontWeight: 600, marginTop:'5vh'}}>Type+Hype Top Scorers</div>
+           <div style={{color: 'white', fontSize: 20, fontWeight: 600, marginTop:'5vh'}}> Your Type+Hype Scorers</div>
         <div style={{color: 'white', fontSize: 14, marginTop: 10, marginBottom: 10}}>
             {
-                scores.sort((a,b)=> b.currentScore -a.currentScore).map((item, key)=>{
-                return <div key={key}style={{fontSize: 12, fontWeight:600, marginBottom: 20}}>{item['name'] + '-'+ item['currentScore']} <div><Rate /></div></div>
+                scores.sort((a,b)=> b.currentScore -a.currentScore).slice(0,5).map((item, key)=>{
+                return <div key={key}style={{fontSize: 12, fontWeight:600, marginBottom: 20}}>{item['name'] + '-'+ item['score']}<span>{item['id']}</span> <div><Rate /></div></div>
                 })
             }
         </div>
