@@ -15,7 +15,7 @@ function App() {
   return (
     <Provider store={store()} >
       <Router history={history}>
-        <Route exact path='/' component={Login} />
+        <Route exact path='/login' component={Login} />
         <Route path='/game' component={Game}/>
         <Route path='/test' component={TypingTest}/>
         <Route path='/results' render={()=> 'Results'}/>

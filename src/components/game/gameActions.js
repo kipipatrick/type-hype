@@ -14,6 +14,7 @@ export const GameActionsTypes = {
 export const getText = ()=>{
        return async(dispatch)=>{
             try {
+                dispatch({type: GameActionsTypes.GAME_REQUEST})
             let text = await GameServices.getText()
    
               dispatch({type: GameActionsTypes.GAME_SUCCESS, payload: text})
@@ -23,10 +24,24 @@ export const getText = ()=>{
             } 
         }
     }
+    export const saveScore = (value)=>{
+        return async(dispatch)=>{
+             try {
+                 dispatch({type: GameActionsTypes.GAME_REQUEST})
+            await GameServices.saveScore(value)
+                history.push('/game')
+            //    dispatch({type: GameActionsTypes.GAME_SUCCESS, payload: text})
+             } catch (error) {
+                 console.log(error.message)
+                 // dispatch(LoginActionsTypes.LOGIN_FAILED)
+             } 
+         }
+     }
 
     export const getScores = ()=>{
         return async(dispatch)=>{
              try {
+                dispatch({type: GameActionsTypes.GAME_REQUEST})
              let scores = await GameServices.getScores()
     
             dispatch({type: GameActionsTypes.GAME_SUCCESS_SCORES, payload: scores})
@@ -38,4 +53,4 @@ export const getText = ()=>{
      }
 
 
-export default {getText, getScores}
+export default {getText, getScores, saveScore}

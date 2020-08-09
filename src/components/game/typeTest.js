@@ -1,13 +1,13 @@
 import React from 'react'
 import { Input, Row, Col , Statistic, Button, Modal, List, Rate, Progress} from 'antd'
-import {getText} from './gameActions'
-import { useDispatch, useSelector } from 'react-redux'
+import {getText, saveScore} from './gameActions'
+import { useDispatch, useSelector ,shallowEqual} from 'react-redux'
 
 let TypingTest = (props)=>{
     const dispatch = useDispatch()
-    let text = useSelector(state => state.game.text)
+    let text = useSelector(state => state.game.text, shallowEqual)
     let [input, setInput] = React.useState('')
-    const [seconds, setSeconds] = React.useState(180);
+    const [seconds, setSeconds] = React.useState(60);
     const [timeUp, setTimeUp] = React.useState(0);
     const [isActive, setIsActive] = React.useState(false);
     const [showResults, setShowResults] = React.useState(false);
@@ -70,6 +70,11 @@ let TypingTest = (props)=>{
       return (x)
 
     }
+
+    function saveAndRetry(){
+      dispatch(saveScore(getCorrectText()/(timeUp/60)))
+      setShowResults(false)
+    }
     
 
 
@@ -117,12 +122,12 @@ console.log(getCorrectText(),(timeUp * 0.0166667, timeUp))
           <Modal
           title="Your Results"
           visible={showResults}
-          onOk={()=>setShowResults(false)}
+          onOk={()=>saveAndRetry()}
           onCancel={()=>setShowResults(false)}
         >
          <Row gutter={16}>
     <Col span={24}>
-      <Statistic round style={{backgroundColor: 'white', }}   valueStyle={{ color: '#8E6AAC', fontWeight: 600 }}  title="Total Words" value={getCorrectText()/(timeUp/180)+'WPM'} />
+      <Statistic round style={{backgroundColor: 'white', }}   valueStyle={{ color: '#8E6AAC', fontWeight: 600 }}  title="Total Words" value={getCorrectText()/(timeUp/60)+' WPM'} />
     </Col>
    
   </Row>

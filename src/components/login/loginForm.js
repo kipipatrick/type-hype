@@ -50,7 +50,7 @@ dispatch(login(values.username, values.password))
       <Form.Item shouldUpdate>
         {() => (
           <Button
-            type="primary"
+           
             htmlType="submit"
             disabled={
               !form.isFieldsTouched(true) ||

@@ -10,19 +10,20 @@ class GameServices{
     }
 
     static async saveScore(value){
+        let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
         let saveStore = await axios.post(`http://localhost:3001/scores`, {
             id: new Date().getTime(),
-            name: 'Rain Sindayen',
-            score: 40
+            name: user['name'],
+            score:value
         })
         return saveStore.data
         
     }
 
     static  async getScores(){
+        let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
         let scores = await axios.get(`http://localhost:3001/scores`)
-        this.saveScore()
-        return scores.data
+        return scores.data.filter(item => item.name === user['name'])
     }
 }
 
