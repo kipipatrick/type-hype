@@ -104,9 +104,19 @@ let TypingTest = (props) => {
 
   function setText(e) {
     setInput(e);
-
-    //  compareArray(inputArray, textArray)
   }
+
+  function returnStar(value){
+    console.log(value)
+    if(value >= 40){
+        return 5
+    } else if( value < 40 && value >23){
+        return 3
+    } else if(value <= 23){
+        return 1
+    }
+}
+
 
   function getCorrectText() {
     let correct = 0;
@@ -136,7 +146,6 @@ let TypingTest = (props) => {
           backgroundColor: "#8E6AAC",
         }}
         visible={showResults}
-        // visible={true}
         onOk={() => saveAndRetry()}
         onCancel={() => saveAndRetry()}
         okText={"Save and Retry"}
@@ -151,14 +160,13 @@ let TypingTest = (props) => {
         // onCancel={()=>setShowResults(false)}
       >
         <Row gutter={16}>
-          <Col span={24}>
-            <Statistic
-              round
-              style={{ backgroundColor: "white" }}
-              valueStyle={{ color: "#8E6AAC", fontWeight: 600 }}
-              title="Total Words"
-              value={getCorrectText() / (timeUp / 60) + " WPM"}
-            />
+          <Col span={24} style={{justifyContent: 'center', display: 'flex'}}>
+            <div>
+          
+          <div style={{justifyContent: 'center', display: 'flex', fontSize: 20,  color: "#8E6AAC",
+            fontWeight: 400,}}>{getCorrectText() / (timeUp / 60) }<span style={{color: 'grey', fontWeight: 200, fontSize: 20}}>   &nbsp;WPM</span></div>
+          <Rate value={returnStar(getCorrectText() / (timeUp / 60))}/>
+            </div>
           </Col>
         </Row>
         <div
@@ -191,7 +199,18 @@ let TypingTest = (props) => {
         />
       </Modal>
       <Modal
-        bodyStyle={{ backgroundColor: "#8E6AAC" }}
+         title={
+          <div
+            style={{
+              color: "#8E6AAC",
+            }}
+          >
+         Results Saved
+          </div>
+        }
+        style={{
+          padding: 1,
+        }}
         okText={"OK"}
         cancelButtonProps={{ style: { display: "none" } }}
         okButtonProps={{
@@ -204,23 +223,17 @@ let TypingTest = (props) => {
         visible={saved}
         onOk={confirmSave}
       >
-        <div
-          style={{
-            color: "white",
-            fontSize: 20,
-            fontWeight: 600,
-            marginBottom: "5vh",
-          }}
-        >
-          Results Saved
-        </div>
-        <div style={{ color: "white", fontSize: 14, fontWeight: 600 }}>
+       
+        <div style={{  fontSize: 14, fontWeight: 600 }}>
           ID : {saved ? saved["id"] : ""}
         </div>
-        <div style={{ color: "white", fontSize: 14, fontWeight: 600 }}>
+        <div style={{  fontSize: 14, fontWeight: 600 }}>
           NAME : {saved ? saved["name"] : ""}
         </div>
-        <div style={{ color: "white", fontSize: 14, fontWeight: 600 }}>
+        <div style={{  fontSize: 14, fontWeight: 600 }}>
+          Score : {saved ? saved["score"] : ""}
+        </div>
+        <div style={{ fontSize: 14, fontWeight: 600 }}>
           DATE: {saved ? moment(saved["id"]).format("DD MMM YYYY hh:mm A") : ""}
         </div>
       </Modal>

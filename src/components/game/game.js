@@ -25,6 +25,17 @@ let Game = () => {
     history.push("/");
   }
 
+  function returnStar(value) {
+    console.log(value);
+    if (value >= 40) {
+      return 5;
+    } else if (value < 40 && value > 23) {
+      return 3;
+    } else if (value <= 23) {
+      return 1;
+    }
+  }
+
   return (
     <Row
       gutter={16}
@@ -68,13 +79,13 @@ let Game = () => {
                   key={key}
                   style={{ fontSize: 12, fontWeight: 600, marginBottom: 20 }}
                 >
-                  {item["name"] + "-" + item["score"]}
+                  {parseFloat(item["score"]).toFixed(0) + " WPM"}
                   <span style={{ fontWeight: 300 }}>
                     {" "}
                     ({moment(item["id"]).format("DD MMMM YYYY hh:mm ")})
                   </span>{" "}
                   <div>
-                    <Rate />
+                    <Rate value={returnStar(item["score"])} />
                   </div>
                 </div>
               );
@@ -120,7 +131,7 @@ let Game = () => {
               width: "50%",
             }}
           >
-            Tests the your typing sped and accuracy. Try it now to see how many
+            Tests the your typing speed and accuracy. Try it now to see how many
             correct words you can type in a minute. Get a free assessment after
             your type test--are you all hype or can you really type?
           </div>
