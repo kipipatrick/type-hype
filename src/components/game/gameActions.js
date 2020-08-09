@@ -31,7 +31,7 @@ export const getText = ()=>{
              try {
                  dispatch({type: GameActionsTypes.GAME_REQUEST})
             await GameServices.saveScore(value)
-            window.location.reload()
+            // window.location.reload()
          
             //    dispatch({type: GameActionsTypes.GAME_SUCCESS, payload: text})
              } catch (error) {
