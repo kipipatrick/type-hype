@@ -21,6 +21,17 @@ export default handleActions(
         ...state,
         user: action.payload
       };
+    },
+    [LoginActionsTypes.LOGIN_FAILED]: (state, action) => {
+      return {
+        ...state,
+        error: action.payload
+      };
+    },
+    [LoginActionsTypes.CLEAR]: (state, action) => {
+      return {
+        initialState
+      };
     }
   },
   initialState

@@ -26,7 +26,6 @@ let Game = () => {
   }
 
   function returnStar(value) {
-    console.log(value);
     if (value >= 40) {
       return 5;
     } else if (value < 40 && value > 23) {

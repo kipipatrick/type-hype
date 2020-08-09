@@ -28,7 +28,6 @@ class LoginServices {
             throw new Error('Username or Password may be incorrect. Please try again.') 
         }
       } else {
-        console.log('error')
         throw new Error('User Not Found')
       }
     }

@@ -6,6 +6,7 @@ export const LoginActionsTypes = {
     LOGIN_REQUEST: '@@LOGIN_REQUEST',
     LOGIN_SUCCESS: '@@LOGIN_SUCCESS',
     LOGIN_FAILED: '@@LOGIN_FAILED',
+    CLEAR: '@@CLEAR',
 }
 
 
@@ -13,7 +14,6 @@ export const LoginActionsTypes = {
 export const login =(email,password, history)=>{
 
         return (dispatch)=>{
-        
             try {
        
                 console.log(email,password )
@@ -24,16 +24,14 @@ export const login =(email,password, history)=>{
                 }
               dispatch({type: LoginActionsTypes.LOGIN_SUCCESS, payload: user})
             } catch (error) {
-                console.log(error.message)
+                dispatch({type: LoginActionsTypes.LOGIN_FAILED, payload: error.message})
                 // dispatch(LoginActionsTypes.LOGIN_FAILED)
             } 
         }
     }
 
     export const logout =(history)=>{
-
         return (dispatch)=>{
-        
             try {
               sessionStorage.removeItem('CURRENT_USER')
               history.push('/')
@@ -44,6 +42,18 @@ export const login =(email,password, history)=>{
         }
     }
 
+    export const clear =()=>{
+        return (dispatch)=>{
+            try {
+                dispatch({type: LoginActionsTypes.CLEAR})
+            } catch (error) {
+                console.log(error.message)
+                // dispatch(LoginActionsTypes.LOGIN_FAILED)
+            } 
+        }
+    }
 
 
-export default {login}
+
+
+export default {login, clear}
