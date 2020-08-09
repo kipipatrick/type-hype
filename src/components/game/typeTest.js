@@ -2,12 +2,14 @@ import React from 'react'
 import { Input, Row, Col , Statistic, Button, Modal, List, Rate, Progress} from 'antd'
 import {getText, saveScore} from './gameActions'
 import { useDispatch, useSelector ,shallowEqual} from 'react-redux'
+import { useHistory } from "react-router-dom";
 
 let TypingTest = (props)=>{
     const dispatch = useDispatch()
     let text = useSelector(state => state.game.text, shallowEqual)
+    let history = useHistory()
     let [input, setInput] = React.useState('')
-    const [seconds, setSeconds] = React.useState(60);
+    const [seconds, setSeconds] = React.useState(2);
     const [timeUp, setTimeUp] = React.useState(0);
     const [isActive, setIsActive] = React.useState(false);
     const [showResults, setShowResults] = React.useState(false);
@@ -62,17 +64,17 @@ let TypingTest = (props)=>{
         let x = false
         if(input.length === text.length){
             text.map((itm, idx)=>{
-              x = itm == input[idx]
+             return x = itm === input[idx]
             })
         } else {
           return false
         }
-      return (x)
+ 
 
     }
 
     function saveAndRetry(){
-      dispatch(saveScore(getCorrectText()/(timeUp/60)))
+      dispatch(saveScore(getCorrectText()/(timeUp/60),history))
       setShowResults(false)
     }
     
@@ -123,7 +125,8 @@ console.log(getCorrectText(),(timeUp * 0.0166667, timeUp))
           title="Your Results"
           visible={showResults}
           onOk={()=>saveAndRetry()}
-          onCancel={()=>setShowResults(false)}
+          okText={'Save and Retry'}
+          // onCancel={()=>setShowResults(false)}
         >
          <Row gutter={16}>
     <Col span={24}>

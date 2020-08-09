@@ -3,8 +3,10 @@ import { Layout } from 'antd';
 import LoginForm from './loginForm';
 
 
-const { Header, Footer, Sider, Content } = Layout;
+
+const {  Content } = Layout;
 let Login = props => {
+  console.log(process.env.NODE_ENV)
   return(  <Layout>
 
     <Content style={{backgroundColor: `#8E6AAC`, width: '100vw', height:'100vh', backgroundSize: 'cover', backgroundOrigin: 'content-box', display: 'flex', overflow:'hidden'}}>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Button, Rate , Spin} from 'antd';
+import { Row, Col, Button, Rate } from 'antd';
 import history from '../../history';
 import { getScores } from './gameActions';
 import { useSelector, useDispatch,shallowEqual } from 'react-redux';
@@ -9,7 +9,6 @@ import moment from 'moment'
 let Game = ()=>{
     let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
     let scores = useSelector(state=> state.game.scores? state.game.scores: [], shallowEqual)
-    let loading = useSelector(state=> state.game.loading, shallowEqual)
     const [showTest, setShowTest] = React.useState(false)
     let dispatch = useDispatch()
     React.useEffect(()=>{
@@ -18,9 +17,7 @@ let Game = ()=>{
     if(!user){
         history.push('/')
     }
-    function goTest(){
-        history.push('/test')
-    }
+  
     return (
         <Row>
         <Col style={{backgroundColor: `#8E6AAC`, padding: 20, height: '100vh'}} span={6} >

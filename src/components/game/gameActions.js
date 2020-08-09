@@ -1,5 +1,6 @@
 import GameServices from './gameServices';
-import history from '../../history';
+
+
 
 export const GameActionsTypes = {
     GAME_REQUEST: '@@GAME_REQUEST',
@@ -24,12 +25,14 @@ export const getText = ()=>{
             } 
         }
     }
-    export const saveScore = (value)=>{
+    export const saveScore = (value, history)=>{
+
         return async(dispatch)=>{
              try {
                  dispatch({type: GameActionsTypes.GAME_REQUEST})
             await GameServices.saveScore(value)
-                history.push('/game')
+            window.location.reload()
+         
             //    dispatch({type: GameActionsTypes.GAME_SUCCESS, payload: text})
              } catch (error) {
                  console.log(error.message)

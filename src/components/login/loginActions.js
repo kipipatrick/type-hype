@@ -1,6 +1,6 @@
 
 import LoginServices from './loginServices';
-import history from '../../history';
+
 
 export const LoginActionsTypes = {
     LOGIN_REQUEST: '@@LOGIN_REQUEST',
@@ -10,8 +10,10 @@ export const LoginActionsTypes = {
 
 
 
-export const login =(email,password)=>{
+export const login =(email,password, history)=>{
+
         return (dispatch)=>{
+        
             try {
        
                 console.log(email,password )

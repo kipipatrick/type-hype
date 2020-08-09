@@ -3,10 +3,12 @@ import { Form, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import {login} from './loginActions';
 import { useDispatch } from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 
 const LoginForm = () => {
   const dispatch = useDispatch()
+  const history = useHistory()
   const [form] = Form.useForm();
   const [, forceUpdate] = useState(); // To disable submit button at the beginning.
 
@@ -15,7 +17,7 @@ const LoginForm = () => {
   }, []);
 
   const onFinish = values => {
-dispatch(login(values.username, values.password))
+dispatch(login(values.username, values.password, history))
 
   };
 

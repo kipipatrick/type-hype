@@ -1,11 +1,11 @@
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import {  Route , HashRouter } from 'react-router-dom';
 import './App.css';
 import Login from './components/login/login';
 import Game from './components/game/game';
 import store from './store'
 import { Provider } from 'react-redux';
-import history from './history';
+
 import TypingTest from './components/game/typeTest';
 
 
@@ -14,12 +14,10 @@ function App() {
 
   return (
     <Provider store={store()} >
-      <Router history={history}>
-        <Route exact path='/login' component={Login} />
-        <Route path='/game' component={Game}/>
-        <Route path='/test' component={TypingTest}/>
-        <Route path='/results' render={()=> 'Results'}/>
-      </Router>
+      <HashRouter basename={process.env.PUBLIC_URL} >
+        <Route exact path='/' component={Login} />
+        <Route exact path={'/game'} component={Game}/>
+      </HashRouter>
     </Provider>
   );
 }
