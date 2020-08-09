@@ -70,7 +70,7 @@ let Game = () => {
           )}
 
           {scores
-            .sort((a, b) => b.score - a.score)
+            .sort((a, b) => b.id - a.id)
             .slice(0, 5)
             .map((item, key) => {
               return (
