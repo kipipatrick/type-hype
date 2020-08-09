@@ -6,7 +6,6 @@ import Game from './components/game/game';
 import store from './store'
 import { Provider } from 'react-redux';
 
-import TypingTest from './components/game/typeTest';
 
 
 function App() {

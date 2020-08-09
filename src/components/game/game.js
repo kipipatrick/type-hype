@@ -6,11 +6,13 @@ import { useSelector, useDispatch,shallowEqual } from 'react-redux';
 import TypingTest from './typeTest';
 import moment from 'moment'
 import { useHistory } from 'react-router';
+import { logout } from '../login/loginActions';
 
 
 let Game = ()=>{
     let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
     let scores = useSelector(state=> state.game.scores? state.game.scores: [], shallowEqual)
+
     let history= useHistory()
     const [showTest, setShowTest] = React.useState(false)
     let dispatch = useDispatch()
@@ -25,8 +27,11 @@ let Game = ()=>{
         <Row>
         <Col style={{backgroundColor: `#8E6AAC`, padding: 20, height: '100vh'}} span={6} >
            <div style={{color: 'white', fontSize: 50, fontWeight: "600"}}>Type+Hype</div>
-           <div style={{color: 'white', fontSize: 20, fontWeight: 600, marginTop:'5vh'}}> Your Type+Hype Scorers</div>
-        <div style={{color: 'white', fontSize: 14, marginTop: 10, marginBottom: 10}}>
+           <div style={{color: 'white', fontSize: 20, fontWeight: 600, marginTop:'5vh'}}>Your Last 5 Records</div>
+        <div style={{color: 'white', fontSize: 14, marginTop: 10, marginBottom: 10, minHeight: '30vh'}}>
+        {
+                scores.length === 0? <div style={{fontWeight: 300}}> No game recorded. </div> : ''
+            }
 
             {
                 scores.sort((a,b)=> b.currentScore -a.currentScore).slice(0,5).map((item, key)=>{
@@ -34,18 +39,16 @@ let Game = ()=>{
                 }) 
              
             }
-            {
-                scores === []? <div> No Game Recorded </div> : ''
-            }
+           
         </div>
 
         <div style={{color: 'white', fontSize: 20, fontWeight: 600,}}>About Type+Hype</div>
         <div style={{color: 'white', fontSize: 14, }}>React.js based application that will allow user to improve his/her typing skills, by measuring current progress and reviewing history of previous games.</div>
 
         </Col>
-        <Col style={{backgroundColor: '#8E6AAC', height: '100vh', padding: 20}} span={18} >
-        <div style={{fontSize: 30, color: 'white'}}> Welcome! <span style={{fontWeight:600}}>{user['name']}</span></div> 
-        <div style={{color: 'white', fontSize: 16, fontWeight: "bold", marginTop: '5vh', marginBottom: '5vh', display: showTest? 'none': ""}}><Button onClick={()=>setShowTest(true)}>Start Typing Test</Button></div>
+        <Col style={{backgroundColor: '#8E6AAC', height: '100vh', padding: 20, overflow: 'auto'}} span={18} >
+        <div style={{fontSize: 30, color: 'white', marginTop: 20}}> Welcome! <span style={{fontWeight:600}}>{user['name']}</span><Button size='large' onClick={ ()=>dispatch(logout(history))} style={{float: "right", background: '#8E6AAC', color:'white'}} >Logout</Button></div> 
+        <div style={{color: 'white', fontSize: 16, fontWeight: "bold", marginTop: '5vh', marginBottom: '5vh', display: showTest? 'none': ""}}><Button  size='large' style={{ background: '#8E6AAC', color:'white'}} onClick={()=>setShowTest(true)}>Start Typing Test</Button></div>
  
        {
            showTest ?<TypingTest/>: ''

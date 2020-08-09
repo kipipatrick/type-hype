@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-let URL = process.env.NODE_ENV === 'development' ? "http://localhost:3001/" : 'https://my-json-server.typicode.com/kipipatrick/type-hype';
+let URL = process.env.NODE_ENV === 'development' ? "http://localhost:3001" : 'https://my-json-server.typicode.com/kipipatrick/type-hype';
 
 class GameServices{
 
@@ -13,6 +13,7 @@ class GameServices{
 
     static async saveScore(value){
         let user = JSON.parse(sessionStorage.getItem('CURRENT_USER'))
+        console.log(value)
         let saveStore = await axios.post(`${URL}/scores`, {
             id: new Date().getTime(),
             name: user['name'],

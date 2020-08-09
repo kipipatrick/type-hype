@@ -30,5 +30,20 @@ export const login =(email,password, history)=>{
         }
     }
 
+    export const logout =(history)=>{
+
+        return (dispatch)=>{
+        
+            try {
+              sessionStorage.removeItem('CURRENT_USER')
+              history.push('/')
+            } catch (error) {
+                console.log(error.message)
+                // dispatch(LoginActionsTypes.LOGIN_FAILED)
+            } 
+        }
+    }
+
+
 
 export default {login}
